@@ -36,7 +36,7 @@ class CategoryTabWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: controller.selectedCatagoryIndex == index
                           ? contentColor
-                          : Colors.white,
+                          : bgColor,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(12),
                           topRight: Radius.circular(12),
