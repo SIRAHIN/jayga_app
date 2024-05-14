@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:jayga_app/screens/home%20screen/models/rentalsListModel.dart';
+import 'package:jayga_app/models/rentalModel.dart';
 import 'package:jayga_app/services/api_services.dart';
 
 class RentalListController extends GetxController {
-  RxList<RentalsListModel> rentalList = RxList([]);
-  RxList<RentalsListModel> fitlerListData =   RxList([]);
+  RxList<RentalsModel> rentalList = RxList([]);
+  RxList<RentalsModel> fitlerListData =   RxList([]);
 
   RxBool isLoading = false.obs;
 
@@ -22,7 +22,7 @@ class RentalListController extends GetxController {
 
     // Rental list search function //
     void filterPlayer(String rentalInfo){
-      List<RentalsListModel> results = [];
+      List<RentalsModel> results = [];
       if(rentalInfo.isEmpty){
         results = rentalList;
       }else {
@@ -40,14 +40,14 @@ class RentalListController extends GetxController {
   
   
   // json Decode function to store inital data into list //
-  Future<List<RentalsListModel>> getAllRentals() async {
+  Future<List<RentalsModel>> getAllRentals() async {
     isLoading.value = true;
     try {
       rentalList.clear();
       var responseData = await ApiServices.fetchData();
       List decodeResponse = jsonDecode(responseData);
       for (var element in decodeResponse) {
-      rentalList.add(RentalsListModel.fromJson(element));
+      rentalList.add(RentalsModel.fromJson(element));
       }
       isLoading.value = false;
       update();

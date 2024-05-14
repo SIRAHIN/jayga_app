@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:jayga_app/screens/RentalDetails_screen/controller/calander_controller.dart';
-import 'package:jayga_app/screens/RentalDetails_screen/widgets/details_tile_text.dart';
-import 'package:jayga_app/screens/home%20screen/models/rentalsListModel.dart';
+import 'package:jayga_app/screens/RentalDetails_screen/widgets/rentalDetailsBody.dart';
+import 'package:jayga_app/models/rentalModel.dart';
 import 'package:jayga_app/utils/constants/color.dart';
-import 'package:jayga_app/utils/constants/text_style.dart';
+
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -17,13 +17,17 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
 
-    DateTimeRange? result;
-
+    // controller instance for state M.
     final calenderController = Get.put(CalenderController());
 
-    RentalsListModel rentalData = Get.arguments['indexData'];
+    //responsive screenSize instance
+    double screenHeight = MediaQuery.of(context).size.height;
+
+     //collecting arguments data from previous screen//
+    RentalsModel rentalData = Get.arguments['indexData'];
+
+    //Converting dates into init formates
     String availableFrom =
         DateFormat.yMMMEd().format(rentalData.availableFrom!);
     String availableFromTime =
@@ -32,7 +36,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
         DateFormat.yMMMEd().format(rentalData.availableUntil!);
     String availableUntilTime =
         DateFormat.jm().format(rentalData.availableUntil!);
-        
 
     return Scaffold(
       body: Stack(
@@ -95,118 +98,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               padding: const EdgeInsets.all(18.0),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-          
-                    const DetailsTileText(
-                      tText: "Rents Amount",
-                      textStyle: dTileTitleText,
-                    ),
-
-                    DetailsTileText(
-                      tText:
-                          "Rents per Night ${rentalData.rentalPerNight} ${rentalData.shortStay == true ? "\n" "Slot Rent - ${rentalData.slotRent}" : ""}",
-                      textStyle: bodyText,
-                    ),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    const Text(
-                      "Location",
-                      style: dTileTitleText,
-                    ),
-                    DetailsTileText(
-                      tText: "${rentalData.address} | ${rentalData.city}",
-                      textStyle: bodyText,
-                    ),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    const Text(
-                      "Owner Information",
-                      style: dTileTitleText,
-                    ),
-                    DetailsTileText(
-                      tText:
-                          "Name: ${rentalData.landlordName} \nContact Number: ${rentalData.landlordPhone}",
-                      textStyle: bodyText,
-                    ),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    const DetailsTileText(
-                      tText: "Available",
-                      textStyle: dTileTitleText,
-                    ),
-                    Text(
-                      "Available from - $availableFrom, $availableFromTime\nAvailable until - $availableUntil, $availableUntilTime",
-                      style: bodyText,
-                    ),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    const DetailsTileText(
-                      tText: "Booked Date",
-                      textStyle: dTileTitleText,
-                    ),
-                    Obx(
-                      () => Text(
-                        "Booked from - ${calenderController.startingDate}\nBooked until - ${calenderController.endDate}",
-                        style: bodyText,
-                      ),
-                    ),
-
-                    Obx(() =>  Text("total dates : ${calenderController.dateDifference}", style: bodyText,)),
-
-                    const SizedBox(
-                      height: 15,
-                    ),
-
-                    InkWell(
-                      onTap: () async {
-                        result = await calenderController.showDate(
-                            context,
-                            DateTime(2024),
-                            DateTime.now().add(const Duration(days: 365)));
-                           
-                        if (result != null) {
-                          calenderController.dateDifference.value = result!.duration.inDays;
-                          calenderController.startingDate.value =
-                              result!.start.toString().split(" ")[0];
-                          calenderController.endDate.value =
-                              result!.end.toString().split(" ")[0];
-                        //  ApiServices.postBookedDates(rentalData.propertyId, result?.start);
-                          calenderController.update();
-                        }
-                     
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: screenHeight * .06,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.teal),
-                        child: const Text(
-                          "Check Availability",
-                          style: btnText,
-                        ),
-                      ),
-                    ),
-
-          
-                  ],
-                ),
+                // Rental Details info Section //
+                child: RentalDetailsBody(rentalData: rentalData, availableFrom: availableFrom, availableFromTime: availableFromTime, availableUntil: availableUntil, availableUntilTime: availableUntilTime, calenderController: calenderController, screenHeight: screenHeight),
               ),
             ),
           )
@@ -215,5 +108,4 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 }
-
 

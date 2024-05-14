@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-class DetailsTileText extends StatelessWidget {
+class DetailsBodyText extends StatelessWidget {
   final String tText;
   final TextStyle? textStyle;
-  const DetailsTileText({super.key, required this.tText, this.textStyle});
+  const DetailsBodyText({super.key, required this.tText, this.textStyle});
 
   @override
   Widget build(BuildContext context) {

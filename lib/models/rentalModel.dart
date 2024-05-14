@@ -2,11 +2,11 @@
 
 import 'dart:convert';
 
-List<RentalsListModel> rentalsModelFromJson(String str) => List<RentalsListModel>.from(json.decode(str).map((x) => RentalsListModel.fromJson(x)));
+List<RentalsModel> rentalsModelFromJson(String str) => List<RentalsModel>.from(json.decode(str).map((x) => RentalsModel.fromJson(x)));
 
-String rentalsModelToJson(List<RentalsListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String rentalsModelToJson(List<RentalsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class RentalsListModel {
+class RentalsModel {
     final String? title;
     final String? address;
     final String? city;
@@ -27,7 +27,7 @@ class RentalsListModel {
     final String? propertyId;
     final List<dynamic>? bookedDates;
 
-    RentalsListModel({
+    RentalsModel({
         this.title,
         this.address,
         this.city,
@@ -49,7 +49,7 @@ class RentalsListModel {
         this.bookedDates,
     });
 
-    factory RentalsListModel.fromJson(Map<String, dynamic> json) => RentalsListModel(
+    factory RentalsModel.fromJson(Map<String, dynamic> json) => RentalsModel(
         title: json["title"],
         address: json["address"],
         city: json["city"],
