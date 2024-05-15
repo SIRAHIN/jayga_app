@@ -40,10 +40,10 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: RichText(
                     text: const TextSpan(
-                        text: "Find you next \n",
+                        text: "Find your next \n",
                         style: titleText,
                         children: [
-                          TextSpan(text: "palce ", style: spanText),
+                          TextSpan(text: "place ", style: spanText),
                           TextSpan(text: "to stay")
                         ]),
                   ),
@@ -52,10 +52,12 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: TextField(
+                    cursorColor: contentColor,
                     onChanged: (value) {
                       rentalListController.filterPlayer(value);
                     },
                     decoration: InputDecoration(
+                    
                       isDense: true,
                       prefixIcon: Image.asset(
                         searchIcon,
@@ -72,7 +74,9 @@ class HomeScreen extends StatelessWidget {
                       hintStyle: hintText,
                       fillColor: fillColor,
                       filled: true,
+                      
                       border: OutlineInputBorder(
+
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(40),
                       ),
