@@ -40,7 +40,7 @@ class RentalListController extends GetxController {
   
   
   // json Decode function to store inital data into list //
-  Future<List<RentalsModel>> getAllRentals() async {
+    Future<List<RentalsModel>>  getAllRentals() async {
     isLoading.value = true;
     try {
       rentalList.clear();
@@ -53,7 +53,8 @@ class RentalListController extends GetxController {
       update();
       return rentalList;
     } on Exception catch (ex) {
-      throw Exception(ex.toString());
+      print(ex.toString());
+      return [];
     }
   }
 }

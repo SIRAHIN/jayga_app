@@ -87,7 +87,7 @@ class RentalDetailsBody extends StatelessWidget {
         Obx(
           () => Center(
             child: Text(
-              "total booking Days : ${calenderController.dates.length}",
+              "Total Booking : ${calenderController.dates.length} Days",
               style: tileBodyText,
             ),
           ),
