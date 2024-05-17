@@ -21,7 +21,7 @@ class RentalListController extends GetxController {
 
 
     // Rental list search function //
-    void filterPlayer(String rentalInfo){
+    void filterRentalList(String rentalInfo){
       List<RentalsModel> results = [];
       if(rentalInfo.isEmpty){
         results = rentalList;
