@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                   child: TextField(
                     cursorColor: contentColor,
                     onChanged: (value) {
-                      rentalListController.filterPlayer(value);
+                      rentalListController.filterRentalList(value);
                     },
                     decoration: InputDecoration(
                     
